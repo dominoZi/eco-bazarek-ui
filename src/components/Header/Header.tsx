@@ -1,14 +1,14 @@
-import { NavItem } from "./NavItem";
+import "./Header.style.css";
+import { Logo } from "./Logo";
+import { HeaderMenu } from "./HeaderMenu";
+import { Navigation } from "./Navigation";
 
 export const Header = () => {
   return (
-    <header className="flex flex-row justify-center items-center h-[64px]">
-      <ul className="flex flex-row">
-        <NavItem to="/">Home</NavItem>
-        <NavItem to="/about-us">O nas</NavItem>
-        <NavItem to="/products">Produkty</NavItem>
-        <NavItem to="/contact">Kontakt</NavItem>
-      </ul>
+    <header className="Header-root">
+      <Logo />
+      <Navigation />
+      <HeaderMenu />
     </header>
   );
 };

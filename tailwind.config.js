@@ -2,7 +2,12 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "bazarek-yellow-main": "var(--bazarek-yellow-main)",
+        "bazarek-brown-dark": "var(--bazarek-brown-dark)",
+      },
+    },
   },
   plugins: [],
 };

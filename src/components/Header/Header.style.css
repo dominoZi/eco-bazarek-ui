@@ -1,0 +1,5 @@
+.Header-root {
+  @apply flex flex-row justify-between items-center h-[64px] relative;
+  min-height: 64px;
+  background-color: var(--bazarek-green-main);
+}
