@@ -12,9 +12,7 @@ export const Subscribe = () => {
       setSubscribing(true);
       subscibe(email)
         .badRequest(() => toast("Niepoprawny email", { type: "error" }))
-        .res(
-          () => () => toast("Dziękujemy za subskrybcję", { type: "success" })
-        )
+        .res(() => toast("Dziękujemy za subskrybcję", { type: "success" }))
         .finally(() => setSubscribing(false));
     } else toast("Wprowadź email", { type: "info" });
   };
