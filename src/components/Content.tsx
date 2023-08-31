@@ -10,16 +10,16 @@ export interface ContentProps extends HTMLAttributes<HTMLElement> {
 export const Content = (props: ContentProps) => {
   const { children, title, loading = false, ...other } = props;
   return (
-    <main className="relative p-10" {...other}>
+    <div className="relative min-h-[50vh]" {...other}>
       <Helmet>
         <title>{title}</title>
       </Helmet>
       {loading && (
-        <div className="absolute top-1/4 left-0 w-full h-full z-10 backdrop-opacity-40 bg-[#f6f5f1]/75">
+        <div className="absolute w-full h-full z-10 backdrop-opacity-40 bg-[#f6f5f1]/75">
           <Loader className="absolute top-[10%] left-[50%]" />
         </div>
       )}
-      {children}
-    </main>
+      <main>{children}</main>
+    </div>
   );
 };

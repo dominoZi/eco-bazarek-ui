@@ -1,5 +1,6 @@
 .Header-root {
-  @apply flex flex-row justify-between items-center h-[64px] relative;
+  @apply flex flex-row justify-between items-center w-full h-[64px] z-10 relative;
+  position: fixed;
   min-height: 64px;
   background-color: var(--bazarek-green-main);
 }

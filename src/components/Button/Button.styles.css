@@ -1,0 +1,29 @@
+.Button-root {
+  @apply uppercase h-[42px] px-6 py-3;
+  line-height: 16px;
+}
+
+.Button-root.contained {
+  background-color: var(--bazarek-green-main);
+  @apply text-white;
+}
+
+.Button-root.text {
+  @apply text-black;
+}
+
+.Button-root.icon {
+  @apply px-2;
+}
+
+.Button-root.contained:hover {
+}
+
+.Button-root.text:hover {
+}
+
+.Button-root.contained.disabled {
+}
+
+.Button-root.text.disabled {
+}
