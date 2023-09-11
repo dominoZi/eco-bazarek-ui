@@ -11,6 +11,7 @@ import {
   ProfilePage,
   NotFoundPage,
 } from "./pages";
+import { RegistrationPage } from "./pages/RegistrationPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
         element: <ContactPage />,
       },
       { path: "/profile", element: <ProfilePage /> },
+      { path: "/registration", element: <RegistrationPage /> },
       { path: "*", element: <NotFoundPage /> },
     ],
   },

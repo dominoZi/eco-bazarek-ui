@@ -1,4 +1,5 @@
 export interface UserProfile {
+  id: string;
   city: string;
   country: string;
   county: string;
@@ -8,7 +9,6 @@ export interface UserProfile {
   farmName: string;
   firstName: string;
   flatNumber: string;
-  id: string;
   lastName: string;
   phone: string;
   postCode: string;
@@ -20,4 +20,9 @@ export interface UserProfile {
 export interface LoginUserResponse {
   token: string;
   user: UserProfile;
+}
+
+export interface CreateUserProfile extends Omit<UserProfile, "id"> {
+  password: string;
+  repeatPassword?: string;
 }

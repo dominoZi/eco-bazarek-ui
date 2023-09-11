@@ -1,8 +1,8 @@
 import clsx from "clsx";
-import { HtmlHTMLAttributes } from "react";
+import { ButtonHTMLAttributes } from "react";
 import "./Button.styles.css";
 
-export interface ButtonProps extends HtmlHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   variant?: "contained" | "text" | "icon";
 }

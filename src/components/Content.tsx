@@ -1,14 +1,16 @@
 import { HTMLAttributes } from "react";
 import { Helmet } from "react-helmet-async";
 import { Loader } from ".";
+import clsx from "clsx";
 
 export interface ContentProps extends HTMLAttributes<HTMLElement> {
   title: string;
   loading?: boolean;
+  mainClassName?: string;
 }
 
 export const Content = (props: ContentProps) => {
-  const { children, title, loading = false, ...other } = props;
+  const { children, mainClassName, title, loading = false, ...other } = props;
   return (
     <div className="relative min-h-[50vh]" {...other}>
       <Helmet>
@@ -19,7 +21,11 @@ export const Content = (props: ContentProps) => {
           <Loader className="absolute top-[10%] left-[50%]" />
         </div>
       )}
-      <main>{children}</main>
+      <main
+        className={clsx("max-w-[1040px] w-full m-auto my-8", mainClassName)}
+      >
+        {children}
+      </main>
     </div>
   );
 };
