@@ -1,6 +1,7 @@
 import { BASE_URL } from "./consts";
 import wretch from "wretch";
 import { CreateUserProfile } from "./types";
+import axios, { AxiosResponse } from "axios";
 
 export const subscibe = (email: string) =>
   wretch(BASE_URL + "/subscribe").post({ email });
@@ -13,3 +14,8 @@ export const loginUser = (email: string, password: string) =>
 
 export const createUser = (newUser: CreateUserProfile) =>
   wretch(BASE_URL + "/users").post({ ...newUser });
+
+export const createUserAxios = (
+  newUser: CreateUserProfile
+): Promise<AxiosResponse<unknown, unknown>> =>
+  axios.post(BASE_URL + "/users", newUser);

@@ -1,41 +1,42 @@
 import clsx from "clsx";
 import {
   HtmlHTMLAttributes,
-  InputHTMLAttributes,
   RefObject,
+  TextareaHTMLAttributes,
   forwardRef,
 } from "react";
 import { FormLabel } from "./FormLabel";
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
+export interface TextareaProps
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
-export interface TextFieldProps
+export interface TextAreaFieldProps
   extends Omit<HtmlHTMLAttributes<HTMLDivElement>, "children"> {
-  inputProps?: InputProps;
+  textAreaProps?: TextareaProps;
   classNameLabel?: string;
   classNameHelperText?: string;
   label?: string;
   helperText?: string;
   required?: boolean;
   error?: boolean;
-  inputRef?: RefObject<HTMLInputElement>;
+  textAreaRef?: RefObject<HTMLTextAreaElement>;
 }
 
-export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
+export const TextAreaField = forwardRef<HTMLDivElement, TextAreaFieldProps>(
   (props, ref) => {
     const {
       className,
       classNameLabel,
       classNameHelperText,
-      inputProps = {},
+      textAreaProps = {},
       label,
       helperText,
-      inputRef,
+      textAreaRef,
       required = false,
       error = false,
       ...other
     } = props;
-    const { className: classNameInput, ...otherInput } = inputProps;
+    const { className: classNameInput, ...otherInput } = textAreaProps;
     return (
       <div
         ref={ref}
@@ -53,8 +54,8 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
             required={required}
           />
         )}
-        <input
-          ref={inputRef}
+        <textarea
+          ref={textAreaRef}
           className={clsx(
             classNameInput,
             "block w-full min-h-[42px] px-2 focus:outline-none font-normal",

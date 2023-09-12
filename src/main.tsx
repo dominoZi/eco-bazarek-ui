@@ -11,7 +11,7 @@ import {
   ProfilePage,
   NotFoundPage,
 } from "./pages";
-import { RegistrationPage } from "./pages/RegistrationPage.tsx";
+import { RegistrationPage } from "./pages/RegistrationPage/RegistrationPage.tsx";
 
 const router = createBrowserRouter([
   {
