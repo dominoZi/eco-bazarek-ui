@@ -5,3 +5,4 @@ export { Loader } from "./Loader";
 export { Button } from "./Button";
 export { TextField } from "./TextField";
 export { TextAreaField } from "./TextAreaField";
+export { PasswordValidator } from "./PasswordValidator";

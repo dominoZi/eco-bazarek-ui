@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import Root from "./Root.tsx";
 import "./index.css";
@@ -12,6 +11,8 @@ import {
   NotFoundPage,
 } from "./pages";
 import { RegistrationPage } from "./pages/RegistrationPage/RegistrationPage.tsx";
+import { SlowPage } from "./pages/SlowPage/SlowPage.tsx";
+import { ReduxExamplePage } from "./pages/ReduxExamplePage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -36,13 +37,13 @@ const router = createBrowserRouter([
       },
       { path: "/profile", element: <ProfilePage /> },
       { path: "/registration", element: <RegistrationPage /> },
+      { path: "/slow-page", element: <SlowPage /> },
+      { path: "use-redux-example", element: <ReduxExamplePage /> },
       { path: "*", element: <NotFoundPage /> },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <RouterProvider router={router} />
 );

@@ -1,9 +1,17 @@
-import { Button, Content, TextAreaField, TextField } from "../../components";
+import { useDeferredValue } from "react";
+import {
+  Button,
+  Content,
+  PasswordValidator,
+  TextAreaField,
+  TextField,
+} from "../../components";
 import { useRegistrationForm } from "./useRegistrationForm";
 
 export const RegistrationPage = () => {
-  const { submit, getFieldProps, getTextFieldProps, reset } =
+  const { formData, submit, getFieldProps, getTextFieldProps, reset } =
     useRegistrationForm();
+  const password = useDeferredValue(formData.password);
   return (
     <Content title="Rejestracja">
       <form onSubmit={submit} onReset={reset} noValidate>
@@ -53,6 +61,7 @@ export const RegistrationPage = () => {
                 type: "password",
               }}
             />
+            <PasswordValidator password={password} />
           </div>
           <h3 className="my-9 uppercase">Adres i informacje o gospodarstwie</h3>
           <TextField

@@ -1,0 +1,1 @@
+export { SlowPage } from "./SlowPage";
