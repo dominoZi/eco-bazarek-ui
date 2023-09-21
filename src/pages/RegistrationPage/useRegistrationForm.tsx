@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { CreateUserProfile } from "../../api/types";
 import { getDefaultCreateUserProfile } from "./utils";
 import { InputProps } from "../../components/TextField";
@@ -6,43 +6,33 @@ import { TextareaProps } from "../../components/TextAreaField";
 import { createUserAxios } from "../../api";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
+import { useUserProfile } from "../../contexts/hooks";
+import { useNavigate } from "react-router-dom";
 
 export const useRegistrationForm = () => {
+  const navigate = useNavigate();
+  const { token, setUserProfile } = useUserProfile();
   const [formData, setFormData] = useState<CreateUserProfile>(
     getDefaultCreateUserProfile
   );
+  useEffect(() => {
+    if (!token) navigate("/profile");
+  }, [token, navigate]);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (0 < Object.keys(errors).length) {
       toast("Wypełnij wszystkie pola poprawnie", { type: "error" });
     }
-    // createUser(formData)
-    //   .badRequest((err) => {
-    //     const response = err.text
-    //       ? (JSON.parse(err.text) as {
-    //           inner: { path: string; message: string }[];
-    //         })
-    //       : null;
-    //     if (response) {
-    //       setErrors(
-    //         response.inner.reduce<{ [key: string]: string }>((prev, curr) => {
-    //           prev[curr.path] = curr.message;
-    //           return prev;
-    //         }, {})
-    //       );
-    //     }
-    //   })
-    //   .res();
     try {
       const { data } = await createUserAxios(formData);
-      //data - response jeśli status 2XX
-      console.log(data);
+      setUserProfile(data.token, data.user);
     } catch (err) {
       const error = err as AxiosError<{
         inner: { path: string; message: string }[];
       }>;
-      if (error.status === 400) {
+
+      if (error.response?.status === 400) {
         const validationErros = error.response?.data;
         if (validationErros)
           setErrors(

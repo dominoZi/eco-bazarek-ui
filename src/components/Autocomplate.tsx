@@ -1,0 +1,100 @@
+import { Combobox, Transition } from "@headlessui/react";
+import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
+import { Fragment, useState } from "react";
+import { FormLabel, FormLabelProps } from "./FormLabel";
+import { FormHelperText } from "./FormHelperText";
+
+export interface AutocomplateProps<T> extends FormLabelProps {
+  helperText?: string;
+  error?: boolean;
+  items: T[];
+  selected: T | null;
+  getKey: (item: T) => string;
+  getLabel: (item: T) => string;
+  onSelectItem: (selected: T | null) => void;
+  filterFunction?: (query: string, item: T) => boolean;
+}
+
+export const Autocomplate = <T,>(props: AutocomplateProps<T>) => {
+  const {
+    items,
+    selected,
+    getKey,
+    getLabel,
+    onSelectItem,
+    filterFunction,
+    error,
+    label,
+    required,
+    helperText,
+  } = props;
+  const [query, setQuery] = useState("");
+  const filteredPeople =
+    query === ""
+      ? items
+      : items.filter((item) =>
+          filterFunction ? filterFunction(query, item) : true
+        );
+  return (
+    <Combobox value={selected} onChange={onSelectItem}>
+      <div className="relative mt-1">
+        <div
+          className={clsx(
+            "relative w-full cursor-default overflow-hidden  bg-white text-left  focus:outline-none",
+            error && "text-red-600"
+          )}
+        >
+          <FormLabel label={label} required={required} />
+          <div className="relative w-full cursor-default overflow-hidden  bg-white text-left  focus:outline-none">
+            <Combobox.Input
+              className="min-h-[42px] w-full border-none py-2 pl-2 pr-10 leading-5 text-gray-900 focus:ring-0"
+              displayValue={(person: { name: string }) => person.name}
+              onChange={(event) => setQuery(event.target.value)}
+            />
+            <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
+              <ChevronUpDownIcon
+                className="h-5 w-5 text-gray-400"
+                aria-hidden="true"
+              />
+            </Combobox.Button>
+          </div>
+          <FormHelperText>{helperText}</FormHelperText>
+        </div>
+        <Transition
+          as={Fragment}
+          leave="transition ease-in duration-100"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+          afterLeave={() => setQuery("")}
+        >
+          <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-sm ring-1 ring-black ring-opacity-5 focus:outline-none">
+            {filteredPeople.length === 0 && query !== "" ? (
+              <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
+                Nothing found.
+              </div>
+            ) : (
+              filteredPeople.map((item) => (
+                <Combobox.Option
+                  key={getKey(item)}
+                  className={({ active, selected }) =>
+                    clsx(
+                      "relative cursor-default select-none p-2",
+                      active
+                        ? "bg-bazarek-green-main text-white"
+                        : "text-gray-900",
+                      selected ? "font-medium" : "font-normal"
+                    )
+                  }
+                  value={item}
+                >
+                  <span className="block truncate">{getLabel(item)}</span>
+                </Combobox.Option>
+              ))
+            )}
+          </Combobox.Options>
+        </Transition>
+      </div>
+    </Combobox>
+  );
+};

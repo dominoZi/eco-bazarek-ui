@@ -26,3 +26,13 @@ export interface CreateUserProfile extends Omit<UserProfile, "id"> {
   password: string;
   repeatPassword?: string;
 }
+
+export interface ResouceBase {
+  id: string;
+  name: string;
+}
+
+export interface Category extends ResouceBase {
+  type: string;
+  iconUrl: string;
+}

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Content } from "../components";
-import { CounterSliceState, counterSlice } from "../Root";
+import { CounterSliceState, counterSlice } from "../store";
 
 export const ReduxExamplePage = () => {
   const dispatch = useDispatch();

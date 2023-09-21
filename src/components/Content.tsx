@@ -12,7 +12,7 @@ export interface ContentProps extends HTMLAttributes<HTMLElement> {
 export const Content = (props: ContentProps) => {
   const { children, mainClassName, title, loading = false, ...other } = props;
   return (
-    <div className="relative min-h-[50vh]" {...other}>
+    <div className="relative" {...other}>
       <Helmet>
         <title>{title}</title>
       </Helmet>
@@ -22,7 +22,10 @@ export const Content = (props: ContentProps) => {
         </div>
       )}
       <main
-        className={clsx("max-w-[1040px] w-full m-auto my-8", mainClassName)}
+        className={clsx(
+          "max-w-[1040px] min-h-[50vh] w-full m-auto my-8",
+          mainClassName
+        )}
       >
         {children}
       </main>

@@ -6,6 +6,7 @@ import {
   forwardRef,
 } from "react";
 import { FormLabel } from "./FormLabel";
+import { FormHelperText } from "./FormHelperText";
 
 export interface TextareaProps
   extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
@@ -65,14 +66,9 @@ export const TextAreaField = forwardRef<HTMLDivElement, TextAreaFieldProps>(
           {...otherInput}
         />
         {helperText && (
-          <span
-            className={clsx(
-              "block text-xs font-normal mt-1",
-              classNameHelperText
-            )}
-          >
+          <FormHelperText className={classNameHelperText}>
             {helperText}
-          </span>
+          </FormHelperText>
         )}
       </div>
     );

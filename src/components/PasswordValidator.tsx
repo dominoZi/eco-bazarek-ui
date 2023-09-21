@@ -1,4 +1,4 @@
-import { HtmlHTMLAttributes } from "react";
+import { HtmlHTMLAttributes, useEffect } from "react";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { FormLabel } from "./FormLabel";
@@ -32,11 +32,29 @@ export type PasswordValidatorProps = Omit<
   "children"
 > & {
   password: string;
+  onValidationStatusChange?: (valid: boolean) => void;
 };
 
 export const PasswordValidator = (props: PasswordValidatorProps) => {
-  const { className, password, ...other } = props;
+  const { className, password, onValidationStatusChange, ...other } = props;
   const lengthValidation = 8 <= password.length;
+  const bigChar = [...password].some((x) => x.match(/^[A-Z]*$/));
+  const oneNumber = [...password].some((x) => x.match(/^[0-9]*$/));
+  const specialChar = [...password].some((x) =>
+    x.match(/[`~!@#$%^&*()-_+{}[\]\\|,.//?;':"]/g)
+  );
+  useEffect(() => {
+    onValidationStatusChange &&
+      onValidationStatusChange(
+        lengthValidation && bigChar && oneNumber && specialChar
+      );
+  }, [
+    onValidationStatusChange,
+    lengthValidation,
+    bigChar,
+    oneNumber,
+    specialChar,
+  ]);
   return (
     <div className={clsx(className, "block")} {...other}>
       <FormLabel label="Hasło musi spełniać następujące wymagania:" />
@@ -45,8 +63,18 @@ export const PasswordValidator = (props: PasswordValidatorProps) => {
           isValid={lengthValidation}
           message="Przynajmniej 8 znaków"
         />
-        <ValidationRuleItem isValid={true} message="Jedna duża litera" />
-        <ValidationRuleItem isValid={true} message="Jeden znak specjalny" />
+        <ValidationRuleItem
+          isValid={bigChar}
+          message="Przynajmniej jedna duża litera"
+        />
+        <ValidationRuleItem
+          isValid={oneNumber}
+          message="Przynajmniej jedna cyfra"
+        />
+        <ValidationRuleItem
+          isValid={specialChar}
+          message="Przynajmniej jeden znak specjalny"
+        />
       </ul>
     </div>
   );

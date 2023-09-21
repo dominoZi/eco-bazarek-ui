@@ -13,6 +13,7 @@ import {
 import { RegistrationPage } from "./pages/RegistrationPage/RegistrationPage.tsx";
 import { SlowPage } from "./pages/SlowPage/SlowPage.tsx";
 import { ReduxExamplePage } from "./pages/ReduxExamplePage.tsx";
+import { ProductPage } from "./pages/ProductPage/ProductPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <ProductsPage />,
+      },
+      {
+        path: "/product/:id",
+        element: <ProductPage />,
       },
       {
         path: "/contact",

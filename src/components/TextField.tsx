@@ -6,6 +6,7 @@ import {
   forwardRef,
 } from "react";
 import { FormLabel } from "./FormLabel";
+import { FormHelperText } from "./FormHelperText";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
@@ -64,14 +65,9 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
           {...otherInput}
         />
         {helperText && (
-          <span
-            className={clsx(
-              "block text-xs font-normal mt-1",
-              classNameHelperText
-            )}
-          >
+          <FormHelperText className={classNameHelperText}>
             {helperText}
-          </span>
+          </FormHelperText>
         )}
       </div>
     );
