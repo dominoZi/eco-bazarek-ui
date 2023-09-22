@@ -16,7 +16,7 @@ export const useRegistrationForm = () => {
     getDefaultCreateUserProfile
   );
   useEffect(() => {
-    if (!token) navigate("/profile");
+    if (token) navigate("/profile");
   }, [token, navigate]);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const submit = async (e: FormEvent<HTMLFormElement>) => {

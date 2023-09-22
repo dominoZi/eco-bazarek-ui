@@ -11,8 +11,8 @@ describe("Testujemy PasswordValidator komponent", () => {
     ).toBe(4);
   });
 
-  test.each([["fds32"], ["34234fdksJHJ311!"], ["fdsfdassd"], ["432432!"]])(
-    "Nieprawidłowe hasło %i",
+  test.each([["fds32"], ["fdksjhj311!"], ["fdsfdassd"], ["432432!"]])(
+    "Nieprawidłowe hasło %s",
     (a) => {
       const el = render(<PasswordValidator password={a} />);
       const items = el.getAllByRole("listitem");

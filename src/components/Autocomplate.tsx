@@ -9,15 +9,16 @@ export interface AutocomplateProps<T> extends FormLabelProps {
   helperText?: string;
   error?: boolean;
   items: T[];
-  selected: T | null;
+  selected?: T | null;
   getKey: (item: T) => string;
   getLabel: (item: T) => string;
-  onSelectItem: (selected: T | null) => void;
+  onSelectItem?: (selected: T | null) => void;
   filterFunction?: (query: string, item: T) => boolean;
 }
 
 export const Autocomplate = <T,>(props: AutocomplateProps<T>) => {
   const {
+    className,
     items,
     selected,
     getKey,
@@ -38,18 +39,18 @@ export const Autocomplate = <T,>(props: AutocomplateProps<T>) => {
         );
   return (
     <Combobox value={selected} onChange={onSelectItem}>
-      <div className="relative mt-1">
+      <div className={clsx("relative mt-1", className)}>
         <div
           className={clsx(
-            "relative w-full cursor-default overflow-hidden  bg-white text-left  focus:outline-none",
+            "relative w-full cursor-default overflow-hidden text-left focus:outline-none",
             error && "text-red-600"
           )}
         >
           <FormLabel label={label} required={required} />
-          <div className="relative w-full cursor-default overflow-hidden  bg-white text-left  focus:outline-none">
+          <div className="relative w-full cursor-default overflow-hidden bg-white text-left focus:outline-none">
             <Combobox.Input
               className="min-h-[42px] w-full border-none py-2 pl-2 pr-10 leading-5 text-gray-900 focus:ring-0"
-              displayValue={(person: { name: string }) => person.name}
+              displayValue={(item: T | null) => (item ? getLabel(item) : "")}
               onChange={(event) => setQuery(event.target.value)}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
@@ -68,7 +69,7 @@ export const Autocomplate = <T,>(props: AutocomplateProps<T>) => {
           leaveTo="opacity-0"
           afterLeave={() => setQuery("")}
         >
-          <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-sm ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-sm ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
             {filteredPeople.length === 0 && query !== "" ? (
               <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                 Nothing found.

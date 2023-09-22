@@ -12,7 +12,7 @@ export const ProfilePage = () => {
       ) : (
         <SigninSection
           login={async (email, password) => {
-            fetch("/");
+            login(email, password);
           }}
         />
       )}

@@ -27,7 +27,7 @@ export const ResourcesContextProvider = (props: { children: ReactNode }) => {
       .then((res) => {
         setUnits(res[0].data);
         setCategories(res[1].data);
-        setTypes(res[0].data);
+        setTypes(res[2].data);
       })
       .finally(() => setLoading(false));
   }, []);
