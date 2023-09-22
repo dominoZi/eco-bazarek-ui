@@ -11,7 +11,9 @@ export const ProfilePage = () => {
         <ProfileSection />
       ) : (
         <SigninSection
-          login={async (email, password) => await login(email, password)}
+          login={async (email, password) => {
+            fetch("/");
+          }}
         />
       )}
     </Content>

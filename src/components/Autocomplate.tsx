@@ -1,6 +1,6 @@
 import { Combobox, Transition } from "@headlessui/react";
 import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { Fragment, useState } from "react";
 import { FormLabel, FormLabelProps } from "./FormLabel";
 import { FormHelperText } from "./FormHelperText";

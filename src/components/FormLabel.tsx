@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { HtmlHTMLAttributes, forwardRef } from "react";
 
 export interface FormLabelProps

@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { LiHTMLAttributes } from "react";
 import { NavLink, To } from "react-router-dom";
 

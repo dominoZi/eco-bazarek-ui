@@ -1,6 +1,6 @@
 import { Tab } from "@headlessui/react";
 import { Content } from "../../../components";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { FarmData } from "./FarmData";
 import { ChangePassword } from "./ChangePassword";
 import { MyProducts } from "./MyProducts";

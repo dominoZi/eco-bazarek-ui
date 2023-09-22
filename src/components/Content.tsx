@@ -1,7 +1,7 @@
 import { HTMLAttributes } from "react";
 import { Helmet } from "react-helmet-async";
 import { Loader } from ".";
-import clsx from "clsx";
+import { clsx } from "clsx";
 
 export interface ContentProps extends HTMLAttributes<HTMLElement> {
   title: string;

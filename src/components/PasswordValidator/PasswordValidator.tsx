@@ -1,7 +1,7 @@
 import { HtmlHTMLAttributes, useEffect } from "react";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import clsx from "clsx";
-import { FormLabel } from "./FormLabel";
+import { clsx } from "clsx";
+import { FormLabel } from "../FormLabel";
 
 interface ValidationRuleItemProps {
   isValid: boolean;
